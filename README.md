@@ -4,12 +4,12 @@ Sergio Garcia
 
 COMP 282 Vasikarla S.
 
-09/30/2023
+10/28/2023
 
 What is a Red Black Tree?
 
 
-A Red-Black Tree is a type of self-balancing binary search tree, where each node in the tree contains an extra bit for denoting the color of the node, either red or black. The structure of a Red-Black Tree is maintained according to several properties that ensure a balanced and efficient search, insertion, and deletion operations.
+A Red-Black Tree is a type of self-balancing binary search tree, where each node in the tree contains an extra bit for denoting the color of the node, either red or black. The structure of a Red-Black Tree is maintained according to several properties that ensure balanced and efficient search, insertion, and deletion operations.
 
 Here are the key properties of a Red-Black Tree:
 
