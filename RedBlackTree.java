@@ -1,14 +1,101 @@
-class Node {
-    int data;
-    Node parent;
-    Node left;
-    Node right;
-    int color;
-}
-
 public class RedBlackTree {
     private Node root;
     private Node TNULL;
+
+    public static void main(String[] args) {
+        RedBlackTree rbTree = new RedBlackTree();
+
+        rbTree.insertNode(10);
+        rbTree.insertNode(20);
+        rbTree.insertNode(30);
+        rbTree.insertNode(15);
+        rbTree.insertNode(25);
+        rbTree.insertNode(12);
+        rbTree.insertNode(23);
+        rbTree.insertNode(35);
+        rbTree.insertNode(19);
+        rbTree.insertNode(28);
+
+        System.out.println("Inorder traversal:");
+        rbTree.inOrder();
+
+        System.out.println("\n\nDeleting node 20:");
+        rbTree.deleteNode(20);
+        rbTree.inOrder();
+
+        System.out.println("\n\nDisplaying Red-Black Tree:");
+        rbTree.displayTree();
+    }
+
+    // Constructor
+    public RedBlackTree() {
+        TNULL = new Node();
+        TNULL.color = 0;
+        TNULL.left = null;
+        TNULL.right = null;
+        root = TNULL;
+    } 
+
+    
+    // Helper method to find the minimum value node in a subtree
+    private Node minimum(Node node) {
+        while (node.left != TNULL) {
+            node = node.left;
+        }
+        return node;
+    }
+
+    // Public methods for tree traversal
+    public void preOrder() {
+        preOrderHelper(this.root);
+    }
+
+    public void inOrder() {
+        inOrderHelper(this.root);
+    }
+
+    public void postOrder() {
+        postOrderHelper(this.root);
+    }
+
+    // Public methods for tree operations
+    public void searchTree(int key) {
+        Node node = searchTreeHelper(this.root, key);
+        if (node != TNULL) {
+            System.out.println("Key found in the tree: " + node.data);
+        } else {
+            System.out.println("Key not found in the tree");
+        }
+    }
+
+    public void deleteNode(int data) {
+        deleteNodeHelper(this.root, data);
+    }
+
+    public void insertNode(int key) {
+        insert(key);
+    }
+    
+    public void displayTree() {
+        displayTreeHelper(root, "", true);
+    }
+    private void displayTreeHelper(Node node, String indent, boolean last) {
+        if (node != TNULL) {
+            System.out.print(indent);
+            if (last) {
+                System.out.print("R----");
+                indent += "     ";
+            } else {
+                System.out.print("L----");
+                indent += "|    ";
+            }
+    
+            String color = (node.color == 1) ? "RED" : "BLACK";
+            System.out.println(node.data + "(" + color + ")");
+            displayTreeHelper(node.left, indent, false);
+            displayTreeHelper(node.right, indent, true);
+        }
+    } 
 
     // Preorder
     private void preOrderHelper(Node node) {
@@ -290,100 +377,5 @@ public class RedBlackTree {
         }
 
         fixInsert(node);
-    }
-
-    // Helper method to find the minimum value node in a subtree
-    private Node minimum(Node node) {
-        while (node.left != TNULL) {
-            node = node.left;
-        }
-        return node;
-    }
-
-    // Public methods for tree traversal
-    public void preOrder() {
-        preOrderHelper(this.root);
-    }
-
-    public void inOrder() {
-        inOrderHelper(this.root);
-    }
-
-    public void postOrder() {
-        postOrderHelper(this.root);
-    }
-
-    public void displayTree() {
-        displayTreeHelper(root, "", true);
-    }
-
-    // Public methods for tree operations
-    public void searchTree(int key) {
-        Node node = searchTreeHelper(this.root, key);
-        if (node != TNULL) {
-            System.out.println("Key found in the tree: " + node.data);
-        } else {
-            System.out.println("Key not found in the tree");
-        }
-    }
-
-    public void deleteNode(int data) {
-        deleteNodeHelper(this.root, data);
-    }
-
-    public void insertNode(int key) {
-        insert(key);
-    }
-
-    private void displayTreeHelper(Node node, String indent, boolean last) {
-        if (node != TNULL) {
-            System.out.print(indent);
-            if (last) {
-                System.out.print("R----");
-                indent += "     ";
-            } else {
-                System.out.print("L----");
-                indent += "|    ";
-            }
-    
-            String color = (node.color == 1) ? "RED" : "BLACK";
-            System.out.println(node.data + "(" + color + ")");
-            displayTreeHelper(node.left, indent, false);
-            displayTreeHelper(node.right, indent, true);
-        }
-    }
-
-    // Constructor
-    public RedBlackTree() {
-        TNULL = new Node();
-        TNULL.color = 0;
-        TNULL.left = null;
-        TNULL.right = null;
-        root = TNULL;
-    }
-
-    public static void main(String[] args) {
-        RedBlackTree rbTree = new RedBlackTree();
-
-        rbTree.insertNode(10);
-        rbTree.insertNode(20);
-        rbTree.insertNode(30);
-        rbTree.insertNode(15);
-        rbTree.insertNode(25);
-        rbTree.insertNode(12);
-        rbTree.insertNode(23);
-        rbTree.insertNode(35);
-        rbTree.insertNode(19);
-        rbTree.insertNode(28);
-
-        System.out.println("Inorder traversal:");
-        rbTree.inOrder();
-
-        System.out.println("\n\nDeleting node 20:");
-        rbTree.deleteNode(20);
-        rbTree.inOrder();
-
-        System.out.println("\n\nDisplaying Red-Black Tree:");
-        rbTree.displayTree();
     }
 }
